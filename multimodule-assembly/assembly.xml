@@ -1,0 +1,93 @@
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0 http://maven.apache.org/xsd/assembly-1.1.0.xsd">
+    <id>${project.version}</id>
+    <formats>
+         <format>tgz</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <fileSets>
+
+		<!-- 运行脚本sbin-->
+		<fileSet>
+          <directory>${project.basedir}/sbin</directory>
+          <outputDirectory>${assembly.name}/sbin</outputDirectory>
+          <includes>
+              <include>*</include>
+          </includes>
+		</fileSet>
+		<!-- common打包 -->
+        <fileSet>
+            <directory>${project.parent.basedir}/multimodule-common/target</directory>
+            <outputDirectory>${assembly.name}/jars</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        <!-- api打包 -->
+        <fileSet>
+            <directory>${project.parent.basedir}/multimodule-api/target</directory>
+            <outputDirectory>${assembly.name}/jars</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        
+        <!-- service打包 -->
+        	<!-- 配置文件 -->
+        <fileSet>
+            <directory>${project.parent.basedir}/multimodule-service/target/classes</directory>
+            <outputDirectory>${assembly.name}/conf</outputDirectory>
+            <excludes>
+            	<exclude>com/**</exclude>
+            	<exclude>sql/**</exclude>
+            	<exclude>env/**</exclude>
+            </excludes>
+        </fileSet>
+        	<!-- 本地依赖lib -->
+        <fileSet>
+            <directory>${project.parent.basedir}/multimodule-api/lib</directory>
+            <outputDirectory>${assembly.name}/jars</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+			<!-- 项目生成lib -->
+        
+        <fileSet>
+            <directory>${project.parent.basedir}/multimodule-service/target</directory>
+            <outputDirectory>${assembly.name}/jars</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        	<!-- pom依赖lib -->
+        <!-- 
+        <fileSet>
+            <directory>${project.parent.basedir}/multimodule-service/target/lib</directory>
+            <outputDirectory>${assembly.name}/jars</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+         -->
+        <fileSet>
+            <directory>${project.parent.basedir}/multimodule-service/lib</directory>
+            <outputDirectory>${assembly.name}/jars</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>${project.basedir}/version</directory>
+            <outputDirectory>${assembly.name}/</outputDirectory>
+            <includes>
+                <include>version.txt</include>
+            </includes>
+        </fileSet>
+
+
+    </fileSets>
+
+</assembly>

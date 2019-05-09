@@ -1,0 +1,44 @@
+server: 
+  port: 8505
+spring: 
+  profiles: 
+    include: db
+  application: 
+    name: multimodule-service
+  main:
+    allow-bean-definition-overriding: true
+  security: 
+    basic: 
+      enabled: false
+  freemarker: 
+    check-template-location: false
+  data: 
+    elasticsearch: 
+      cluster-name: es-cluster
+      cluster-nodes: @es.cluster-nodes@
+  zipkin:
+    base-url: @zipkin.base-url@
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      probability: 1.0
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8600/eureka
+      
+feign:
+   hystrix:
+      enabled:false
+
+      
+      
+security:
+  basic: 
+    enabled: false
+management: 
+  security: 
+    enabled: false
+    
