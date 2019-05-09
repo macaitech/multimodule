@@ -1,1 +1,1 @@
-"# multimodule" 
+基于springboot、springcloud框架下，maven多项目打包的项目案例
